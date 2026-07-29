@@ -1,7 +1,9 @@
 # phenom-foreignlaw
 
-司法院外國法中譯與德中法學譯語表的獨立靜態前端。內容主本在 private
+司法院外國法中譯與德中法學譯語表的獨立 React/Vite 前端。內容主本在 private
 `mt019/phenom-foreignlaw-data`；本站只消費其可攜、可驗證的公開 snapshot。
+頁面保留 Canvas Lab 原有的互動與版面，共用元件、設計 token 與授權字體由
+`@phenomcanvas/ui` 的固定 release 提供；升級 UI 套件必須重新做桌面與行動版視覺驗收。
 
 ```sh
 npm install
