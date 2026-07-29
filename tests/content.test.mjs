@@ -28,3 +28,14 @@ test('public JSON does not expose repository paths', async () => {
   const text = `${JSON.stringify(reports)}${JSON.stringify(glossary)}`;
   assert.doesNotMatch(text, /\/Users\/|Documents\/NTU|整理路徑|相對路徑/);
 });
+
+test('glossary rulings expose the frontend contract', () => {
+  assert.ok(Array.isArray(glossary['裁決']));
+  assert.equal(glossary['裁決'].length, 73);
+  for (const ruling of glossary['裁決']) {
+    assert.equal(typeof ruling.de, 'string');
+    assert.equal(typeof ruling['標準中譯'], 'string');
+    assert.equal(typeof ruling['類別說明'], 'string');
+    assert.equal(typeof ruling['理由'], 'string');
+  }
+});

@@ -18,6 +18,8 @@ const checks = [
   [glossary.includes('https://foreignlaw.phenomcanvas.com/glossary/'), 'glossary canonical'],
   [glossary.includes('工作表'), 'glossary 狀態'],
   [glossary.includes('data-glossary-root'), 'glossary 搜尋'],
+  [glossary.includes('Abwägung'), '多譯裁決德文標題'],
+  [glossary.includes('衡量 · 定稿標準譯'), '多譯裁決結果'],
   [notFound.includes('找不到這一頁'), '404'],
   [sitemap.includes('/glossary/'), 'sitemap glossary'],
   [manifest.counts.cases === 768, '案件數'],

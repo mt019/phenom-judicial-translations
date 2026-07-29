@@ -42,11 +42,11 @@ const description = `德國聯邦憲法法院裁判選輯第 6–18 輯的德中
   <section class="rulings">
     <div class="section-heading"><p class="kicker">TRANSLATION DECISIONS</p><h2>多譯裁決</h2><p>不是抹平差異；能定一詞者說明理由，必須依語境者保留並存。</p></div>
     <div class="ruling-grid">
-      {Object.entries(rulings).map(([de, ruling]) => (
+      {rulings.map((ruling) => (
         <article>
-          <h3 lang="de">{de}</h3>
-          <p class="ruling-answer">{ruling['裁決'] || ruling['標準譯'] || ruling['結論'] || '依語境判斷'}</p>
-          <p>{ruling['理由'] || ruling['說明'] || ''}</p>
+          <h3 lang="de">{ruling.de}</h3>
+          <p class="ruling-answer">{ruling['標準中譯']} · {ruling['類別說明']}</p>
+          <p>{ruling['理由']}</p>
         </article>
       ))}
     </div>
