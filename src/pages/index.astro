@@ -17,7 +17,6 @@ const cases = reports.flatMap((report) =>
       pages: file['頁數'],
       bytes: file['位元組'],
       assetKey: file.assetKey,
-      sha256: file.sha256,
     }))
 );
 const publicReports = reports.map((report) => ({

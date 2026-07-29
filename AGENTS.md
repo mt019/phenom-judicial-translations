@@ -7,7 +7,8 @@
 
 - 只消費 data repo 的 `export:web` snapshot，不猜私有 repo 目錄。
 - production／preview 一律使用 clean snapshot、完整 data SHA、逐檔 SHA-256。
-- PDF 只從 snapshot `assets.json` allowlist 上傳至 R2，key 是內容 SHA-256。
+- PDF 只從 snapshot `assets.json` allowlist 上傳至 R2；公開 key 使用官方 `pfid`／文件 ID，
+  SHA-256 留在完整性驗證層。
 - 公開 canonical：`https://foreignlaw.phenomcanvas.com/` 與 `/glossary/`。
 - glossary 必須清楚標示工作表性質與未逐條複核的範圍。
 - preview 不得使用 `main` 分支標記或掛正式 hostname；production 必須先通過 preview。

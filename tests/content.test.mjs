@@ -14,12 +14,12 @@ test('snapshot counts and source revision agree', () => {
   assert.equal(reports.source.commit, manifest.dataCommit);
 });
 
-test('every public PDF reference is allowlisted and content-addressed', () => {
+test('every public PDF reference is allowlisted and has a stable official id', () => {
   const allowed = new Set(assets.assets.map((asset) => asset.key));
   const files = reports['報告'].flatMap((report) => report['檔案']).filter((file) => file.assetKey);
   assert.equal(files.length, manifest.counts.pdfReferences);
   for (const file of files) {
-    assert.match(file.assetKey, /^foreignlaw\/pdf\/[a-f0-9]{64}\.pdf$/);
+    assert.match(file.assetKey, /^foreignlaw\/pdf\/(?:\d{10}|cons-\d+-\d{3})\.pdf$/);
     assert.ok(allowed.has(file.assetKey));
   }
 });

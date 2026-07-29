@@ -19,5 +19,5 @@ npm run dev
 - `/glossary/`：1,864 組德中法學譯語與多譯狀態。
 - `/404.html`：可操作的站內尋路頁。
 
-PDF 不進 Pages artifact；snapshot 只帶內容定址的 R2 key，前端以
+PDF 不進 Pages artifact；snapshot 只帶由官方 `pfid`／文件 ID 組成的穩定 R2 key，前端以
 `PUBLIC_ASSET_BASE`（預設 `https://assets.phenomcanvas.com`）組成 immutable URL。
