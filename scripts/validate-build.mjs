@@ -15,6 +15,7 @@ const checks = [
   [home.includes('https://foreignlaw.phenomcanvas.com/'), '首頁 canonical'],
   [home.includes('application/ld+json'), '首頁 JSON-LD'],
   [home.includes('data-search-root'), '首頁搜尋'],
+  [home.includes('/pdf/'), '同站 PDF 路由'],
   [glossary.includes('https://foreignlaw.phenomcanvas.com/glossary/'), 'glossary canonical'],
   [glossary.includes('工作表'), 'glossary 狀態'],
   [glossary.includes('data-glossary-root'), 'glossary 搜尋'],

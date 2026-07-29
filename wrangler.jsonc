@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "phenom-foreignlaw",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-07-29",
+  "r2_buckets": [
+    {
+      "binding": "FOREIGNLAW_PDFS",
+      "bucket_name": "phenom-public-assets"
+    }
+  ]
+}

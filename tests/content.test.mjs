@@ -39,3 +39,11 @@ test('glossary rulings expose the frontend contract', () => {
     assert.equal(typeof ruling['理由'], 'string');
   }
 });
+
+test('public PDF route function only accepts stable ids', async () => {
+  const source = await readFile(new URL('../functions/pdf/[id].js', import.meta.url), 'utf8');
+  assert.match(source, /FOREIGNLAW_PDFS/);
+  assert.match(source, /Accept-Ranges/);
+  assert.match(source, /application\/pdf/);
+  assert.match(source, /foreignlaw\/pdf\//);
+});

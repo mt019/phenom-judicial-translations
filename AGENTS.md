@@ -9,6 +9,8 @@
 - production／preview 一律使用 clean snapshot、完整 data SHA、逐檔 SHA-256。
 - PDF 只從 snapshot `assets.json` allowlist 上傳至 R2；公開 key 使用官方 `pfid`／文件 ID，
   SHA-256 留在完整性驗證層。
+- 讀者網址固定為同站 `/pdf/<id>.pdf`；Pages Function 經 private R2 binding 取檔，
+  不暴露 R2 managed URL 或共用 assets hostname。
 - 公開 canonical：`https://foreignlaw.phenomcanvas.com/` 與 `/glossary/`。
 - glossary 必須清楚標示工作表性質與未逐條複核的範圍。
 - preview 不得使用 `main` 分支標記或掛正式 hostname；production 必須先通過 preview。

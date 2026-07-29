@@ -19,7 +19,7 @@ const deployment = {
   dataRepository: 'mt019/phenom-foreignlaw-data',
   dataCommit: snapshot.dataCommit,
   snapshotManifestSha256: createHash('sha256').update(snapshotManifestBody).digest('hex'),
-  assetOrigin: process.env.PUBLIC_ASSET_BASE || 'https://assets.phenomcanvas.com',
+  pdfBase: 'https://foreignlaw.phenomcanvas.com/pdf',
   counts: snapshot.counts,
 };
 await writeFile(path.join(repo, 'dist/deployment-manifest.json'), `${JSON.stringify(deployment, null, 2)}\n`);

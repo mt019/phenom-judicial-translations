@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import reportsData from '../data/generated/reports.json';
-import assetManifest from '../data/generated/assets.json';
 const reports = reportsData['報告'];
 const summary = reportsData['摘要'];
 const cases = reports.flatMap((report) =>
@@ -30,7 +29,6 @@ const publicReports = reports.map((report) => ({
   pages: report['頁數'],
   official: report['官方詳情頁'],
 }));
-const assetBase = import.meta.env.PUBLIC_ASSET_BASE || assetManifest.publicBase;
 const description = `司法院外國法中譯公開索引：${summary['官方報告數']} 筆報告、${summary['案件總數']} 件裁判譯文，可依案名、譯者、系列與年代搜尋並閱讀 PDF。`;
 ---
 <BaseLayout title="司法院外國法中譯索引｜Phenom" description={description} canonical="/" type="CollectionPage">
@@ -93,7 +91,7 @@ const description = `司法院外國法中譯公開索引：${summary['官方報
     <iframe id="pdf-frame" title="PDF 閱讀器"></iframe>
   </dialog>
 
-  <script define:vars={{ cases, assetBase }}>
+  <script define:vars={{ cases }}>
     const root = document.querySelector('[data-search-root]');
     const input = root.querySelector('#case-search');
     const series = root.querySelector('#series-filter');
@@ -111,7 +109,7 @@ const description = `司法院外國法中譯公開索引：${summary['官方報
     let limit = 40;
     let current = [];
     const openPdf = (item) => {
-      const url = `${assetBase.replace(/\/$/, '')}/${item.assetKey.split('/').map(encodeURIComponent).join('/')}`;
+      const url = `/pdf/${encodeURIComponent(item.assetKey.replace(/^foreignlaw\/pdf\//, ''))}`;
       document.querySelector('#pdf-title').textContent = item.title;
       document.querySelector('#pdf-meta').textContent = [item.series, item.translators.join('、') && `${item.translators.join('、')} 譯`, item.pages && `${item.pages} 頁`, formatBytes(item.bytes)].filter(Boolean).join(' · ');
       document.querySelector('#pdf-open').href = url;
