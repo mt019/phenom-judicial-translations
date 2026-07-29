@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+.foreignlaw-snapshot/
+src/data/generated/
+.DS_Store

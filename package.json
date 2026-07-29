@@ -1,0 +1,21 @@
+{
+  "name": "phenom-foreignlaw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data:local": "node scripts/export-local-data.mjs",
+    "prebuild": "node scripts/prepare-build.mjs",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/write-deployment-manifest.mjs && node scripts/validate-build.mjs",
+    "dev": "node scripts/prepare-build.mjs && ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "7.1.6"
+  }
+}
