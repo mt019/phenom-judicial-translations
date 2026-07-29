@@ -8,7 +8,10 @@ import { fileURLToPath } from 'node:url';
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const snapshotManifestBody = await readFile(path.join(repo, 'src/data/generated/manifest.json'));
 const snapshot = JSON.parse(snapshotManifestBody);
-let webCommit = process.env.GITHUB_SHA || '';
+// In the ops deployment workflow GITHUB_SHA identifies phenom-ops, not this
+// checked-out public web repository. Only accept an explicit override; otherwise
+// derive the immutable revision from this repository itself.
+let webCommit = process.env.EXPECTED_WEB_COMMIT || '';
 if (!webCommit) webCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim();
 const deployment = {
   schemaVersion: 1,
