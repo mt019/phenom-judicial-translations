@@ -24,6 +24,7 @@ const checks = [
   [sitemap.includes('/glossary/'), 'sitemap glossary'],
   [manifest.counts.cases === 768, '案件數'],
   [manifest.counts.glossaryTerms === 1864, '術語數'],
+  [/^[a-f0-9]{64}$/.test(manifest.snapshotManifestSha256), 'snapshot manifest SHA-256'],
 ];
 for (const [ok, label] of checks) if (!ok) throw new Error(`build 驗證失敗：${label}`);
 const size = (await stat(path.join(dist, 'index.html'))).size + (await stat(path.join(dist, 'glossary/index.html'))).size;
