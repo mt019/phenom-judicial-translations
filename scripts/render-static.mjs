@@ -6,7 +6,7 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const dist = path.join(root, 'dist');
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
 const { render } = await import(pathToFileURL(path.join(root, '.ssr/entry-server.js')));
-const origin = 'https://foreignlaw.phenomcanvas.com';
+const origin = 'https://judicial-translations.phenomcanvas.com';
 
 const pages = [
   {

@@ -77,6 +77,8 @@ export default function LegalGlossary() {
     <div data-glossary-root>
     <DashboardLayout
       scale={scale}
+      back={{ href: 'https://phenomcanvas.com/', label: '' }}
+      backIndexHref="https://phenomcanvas.com/all"
       headerRight={<><AppearanceMenu /><FontSizeControl scale={scale} onChange={setScale} /></>}
       eyebrow="Phenom · 德語法學譯語表"
       title="德中法學關鍵詞索引"

@@ -225,9 +225,12 @@ export default function JirsForeignLaw() {
 
             {/* ── 左側常駐導覽欄（IIAS 式） ── */}
             <aside className="contents lg:block lg:py-5 lg:sticky lg:top-0 lg:h-screen lg:self-start lg:overflow-y-auto lg:border-r lg:pr-5">
-              <div className="flex items-center justify-between gap-2 pt-5 lg:flex-col lg:items-start lg:gap-3 lg:pt-0">
+              <div className="group flex items-center justify-between gap-2 pt-5 lg:flex-col lg:items-start lg:gap-3 lg:pt-0">
                 {/* 這頁自己刻了左欄，返回鍵走共用元件＋全站配置，不寫死落點。 */}
-                <BackLink className="shrink-0 whitespace-nowrap text-token-sm text-ink-faint transition-colors duration-fast hover:text-accent" />
+                <BackLink
+                  back={{ href: 'https://phenomcanvas.com/', label: '' }}
+                  indexHref="https://phenomcanvas.com/all"
+                />
                 <div className="flex shrink-0 items-center gap-2">
                   <AppearanceMenu /><FontSizeControl scale={scale} onChange={setScale} />
                 </div>

@@ -15,11 +15,11 @@ const clientJs = (await Promise.all(clientJsFiles.map((name) => read(`assets/${n
 const executable = `${home}\n${glossary}\n${clientJs}`;
 const checks = [
   [home.includes('<title>司法院外國法中譯索引'), '首頁 title'],
-  [home.includes('https://foreignlaw.phenomcanvas.com/'), '首頁 canonical'],
+  [home.includes('https://judicial-translations.phenomcanvas.com/'), '首頁 canonical'],
   [home.includes('application/ld+json'), '首頁 JSON-LD'],
   [home.includes('data-search-root'), '首頁搜尋'],
   [executable.includes('/pdf/'), '同站 PDF 路由'],
-  [glossary.includes('https://foreignlaw.phenomcanvas.com/glossary/'), 'glossary canonical'],
+  [glossary.includes('https://judicial-translations.phenomcanvas.com/glossary/'), 'glossary canonical'],
   [glossary.includes('工作表'), 'glossary 狀態'],
   [glossary.includes('data-glossary-root'), 'glossary 搜尋'],
   [executable.includes('Abwägung'), '多譯裁決德文標題'],

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://foreignlaw.phenomcanvas.com/sitemap-index.xml
+Sitemap: https://judicial-translations.phenomcanvas.com/sitemap-index.xml

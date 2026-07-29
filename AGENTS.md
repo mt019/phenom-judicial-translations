@@ -1,7 +1,7 @@
-# phenom-foreignlaw
+# phenom-judicial-translations
 
 司法院外國法中譯的獨立公開前端。資料主本永遠是 private
-`mt019/phenom-foreignlaw-data`；本 repo 不收 corpus、PDF、raw HTML、notes 或 token。
+`mt019/phenom-judicial-translations-data`；本 repo 不收 corpus、PDF、raw HTML、notes 或 token。
 
 ## 固定契約
 
@@ -11,10 +11,12 @@
   SHA-256 留在完整性驗證層。
 - 讀者網址固定為同站 `/pdf/<id>.pdf`；Pages Function 經 private R2 binding 取檔，
   不暴露 R2 managed URL 或共用 assets hostname。
-- 公開 canonical：`https://foreignlaw.phenomcanvas.com/` 與 `/glossary/`。
+- 公開 canonical：`https://judicial-translations.phenomcanvas.com/` 與 `/glossary/`。
 - glossary 必須清楚標示工作表性質與未逐條複核的範圍。
 - preview 不得使用 `main` 分支標記或掛正式 hostname；production 必須先通過 preview。
 - 不把 reader 全文、TXT 或頁面 JSON 塞進 Pages；Pages 只帶 UI、metadata、搜尋資料。
+- 資料 snapshot kind 與 R2 `foreignlaw/pdf/` prefix 是改名前的穩定儲存契約；不得為了
+  命名整齊複製 912 份 PDF。公開產品與網址一律使用 `judicial-translations`。
 
 ## 驗證
 

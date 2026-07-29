@@ -15,14 +15,14 @@ let webCommit = process.env.EXPECTED_WEB_COMMIT || '';
 if (!webCommit) webCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim();
 const deployment = {
   schemaVersion: 1,
-  site: 'foreignlaw',
-  hostname: 'foreignlaw.phenomcanvas.com',
-  webRepository: 'mt019/phenom-foreignlaw',
+  site: 'judicial-translations',
+  hostname: 'judicial-translations.phenomcanvas.com',
+  webRepository: 'mt019/phenom-judicial-translations',
   webCommit,
-  dataRepository: 'mt019/phenom-foreignlaw-data',
+  dataRepository: 'mt019/phenom-judicial-translations-data',
   dataCommit: snapshot.dataCommit,
   snapshotManifestSha256: createHash('sha256').update(snapshotManifestBody).digest('hex'),
-  pdfBase: 'https://foreignlaw.phenomcanvas.com/pdf',
+  pdfBase: 'https://judicial-translations.phenomcanvas.com/pdf',
   counts: snapshot.counts,
 };
 await writeFile(path.join(repo, 'dist/deployment-manifest.json'), `${JSON.stringify(deployment, null, 2)}\n`);
