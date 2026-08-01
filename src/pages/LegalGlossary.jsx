@@ -81,6 +81,7 @@ export default function LegalGlossary() {
       backIndexHref="https://phenomcanvas.com/all"
       headerRight={<><AppearanceMenu /><FontSizeControl scale={scale} onChange={setScale} /></>}
       eyebrow="Phenom · 德語法學譯語表"
+      eyebrowBack={{ href: '/', label: '外國法翻譯索引' }}
       title="德中法學關鍵詞索引"
       titleClassName="font-display"
       summary="德國聯邦憲法法院裁判選輯第 6–18 輯附錄的德中／中德關鍵詞索引，彙整成一份可檢索的雙語對照。這是候選工作表，非權威定稿：含真正異譯、跨輯用語差異與待裁決項。"
