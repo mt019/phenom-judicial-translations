@@ -1,0 +1,10 @@
+# 檔名帶內容雜湊的產物，內容永遠不會變，所以給一年加 immutable。
+# Cloudflare Pages 的預設是 public, max-age=14400, must-revalidate，等於每四小時要回頭
+# 問一次；而這些檔案換內容就會換檔名，問了也只會拿到同一份。
+# 出處：MDN 快取指南「Cache Busting」與「Avoiding revalidation」，讀書筆記在
+# phenom-ops/docs/ops-learning/notes/http-caching.md 第 2 條。
+#
+# 這個檔必須在部署目錄的根。放錯層級不會報錯，只會安靜地沒有作用。
+# R2 上的 PDF 不走這裡，它們的標頭在 R2 那一端設。
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
