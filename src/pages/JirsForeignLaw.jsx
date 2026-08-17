@@ -1,7 +1,7 @@
 // DATA — 由 jirs-foreign-law 資料倉 sync（scripts/sync_canvas.py）。canvas 只管前端：
 // 此頁只吃輕量 metadata；PDF 全文由資料倉部署站以 URL 提供，不進本倉。
 //
-// 版型學中研院法研所出版品頁（IiasPublications）：左側常駐導覽欄＋主欄索引。但內容模型
+// 版型走共用殼 RailLayout（左欄常駐導覽＋滿寬工作區，v0.1.31 從這一頁抽上去）。內容模型
 // 出自本資料自身的結構——544 個附檔裡有 444 個是「單一裁判譯文」，那才是法律研究者檢索的
 // 單位，所以主軸是「案件索引」（可搜案名／譯者、依系列篩），卷冊目錄與陽春清單保留為另一檢視。
 import { useMemo, useState, useCallback } from 'react';
@@ -9,13 +9,11 @@ import { ExternalLink, BookMarked, Dices } from 'lucide-react';
 import {
   AccordionItem,
   AppearanceMenu,
-  BackLink,
   Dropdown,
-  Eyebrow,
   FontSizeControl,
   PdfViewer,
+  RailLayout,
   SearchField,
-  SHELL_PAD_X_RAIL,
   useExpandedSet,
   useFontScale,
   useTabParam,
@@ -219,40 +217,17 @@ export default function JirsForeignLaw() {
 
   return (
     <>
-      <main data-search-root className="min-h-screen bg-paper paper-texture text-ink" style={{ '--reader-scale': scale }}>
-        <div className={`mx-auto max-w-7xl ${SHELL_PAD_X_RAIL}`}>
-          <div className="lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-10">
-
-            {/* ── 左側常駐導覽欄（IIAS 式） ── */}
-            <aside className="contents lg:block lg:py-5 lg:sticky lg:top-0 lg:h-screen lg:self-start lg:overflow-y-auto lg:border-r lg:pr-5">
-              <div className="group flex items-center justify-between gap-2 pt-5 lg:flex-col lg:items-start lg:gap-3 lg:pt-0">
-                {/* 這頁自己刻了左欄，返回鍵走共用元件＋全站配置，不寫死落點。 */}
-                <BackLink
-                  back={{ href: 'https://phenomcanvas.com/', label: '' }}
-                  indexHref="https://phenomcanvas.com/all"
-                />
-                <div className="flex shrink-0 items-center gap-2">
-                  <AppearanceMenu /><FontSizeControl scale={scale} onChange={setScale} />
-                </div>
-              </div>
-              <button type="button"
-                onClick={() => { setView('overview'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                className="group mt-4 block text-left"
-                title="回本頁首頁（總覽）">
-                <Eyebrow className="mb-1">司法院中譯外國法學</Eyebrow>
-                <h1 className="font-display text-token-lg leading-tight text-ink transition-colors duration-fast group-hover:text-accent lg:text-token-xl">外國法翻譯索引</h1>
-              </button>
-              {/* 窄屏吸頂時換行，不橫捲（見 validate-shell-chrome.mjs 的吸頂欄規則）。
-                  lg 起改成左欄的直排格線，本來就不會有橫向問題。 */}
-              <nav className="sticky top-0 z-20 mt-5 flex flex-wrap gap-1 border-b border-line-soft bg-paper py-2 lg:static lg:z-auto lg:grid lg:gap-0.5 lg:border-b-0 lg:bg-transparent lg:py-0">
-                {VIEWS.map((v) => (
-                  <button key={v.id} type="button" onClick={() => setView(v.id)}
-                    className={`shrink-0 rounded-token-md px-2.5 py-1.5 text-left text-token-sm transition-colors duration-fast ${
-                      view === v.id ? 'bg-accent-soft font-semibold text-accent' : 'text-ink-muted hover:text-ink'
-                    }`}
-                  >{v.label}</button>
-                ))}
-              </nav>
+      <RailLayout
+        scale={scale}
+        back={{ href: 'https://phenomcanvas.com/', label: '' }}
+        backIndexHref="https://phenomcanvas.com/all"
+        headerRight={<><AppearanceMenu /><FontSizeControl scale={scale} onChange={setScale} /></>}
+        eyebrow="司法院中譯外國法學"
+        title="外國法翻譯索引"
+        onHome={() => { setView('overview'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        homeTitle="回本頁首頁（總覽）"
+        nav={{ label: '檢視', value: view, onChange: setView, items: VIEWS }}
+        rail={<>
               <div className="mt-5 border-t border-line-soft pt-4">
                 <button type="button" onClick={() => roll(rollPool)}
                   className="inline-flex items-center gap-2 text-token-sm text-ink-muted transition-colors duration-fast hover:text-accent">
@@ -277,10 +252,8 @@ export default function JirsForeignLaw() {
                 </a>
                 <p className="mt-1 hidden text-token-xs leading-relaxed text-ink-faint lg:block">德國選輯附錄的德中關鍵詞索引，與本頁互為經緯。</p>
               </div>
-            </aside>
-
-            {/* ── 主欄 ── */}
-            <div className="reader-scale min-w-0 py-8">
+        </>}
+      >
 
               {view === 'overview' ? (
                 <section className="max-w-3xl space-y-8">
@@ -536,10 +509,7 @@ export default function JirsForeignLaw() {
                 </section>
               ) : null}
 
-            </div>
-          </div>
-        </div>
-      </main>
+      </RailLayout>
 
       {viewing ? (
         <PdfViewer
