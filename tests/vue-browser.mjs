@@ -207,8 +207,13 @@ try {
     assert.equal(await p.evaluate(() => document.body.style.overflow), 'hidden');
     const newTab = dialog.getByRole('link', { name: '新分頁', exact: true });
     assert.equal(new URL(await newTab.getAttribute('href'), base).href, expected);
+    // Headless Chromium has no PDF viewer: the new tab turns the PDF into a download and its own URL stays empty.
+    const downloads = [];
+    const onDownload = d => downloads.push(d.url());
+    desktop.on('download', onDownload);
     const popupPromise = p.waitForEvent('popup'); await newTab.click(); const popup = await popupPromise;
-    await until(() => popup.url() === expected, 'same-site PDF opens new tab'); await popup.close();
+    await until(() => popup.url() === expected || downloads.includes(expected), 'same-site PDF opens new tab');
+    desktop.off('download', onDownload); await popup.close();
     await p.keyboard.press('Escape'); await count(p, '[role="dialog"]', 0);
     assert.equal(await p.evaluate(() => document.body.style.overflow), previousOverflow);
     assert(await trigger.evaluate(el => el === document.activeElement), 'PDF close restores trigger focus');
