@@ -16,6 +16,11 @@ if (!webCommit) webCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: re
 const deployment = {
   schemaVersion: 1,
   site: 'judicial-translations',
+  framework: 'vue',
+  frameworkVersion: '3.5.44',
+  viteVersion: '8.3.5',
+  uiPackage: '@phenomcanvas/ui-vue',
+  uiVersion: '0.3.0',
   hostname: 'judicial-translations.phenomcanvas.com',
   webRepository: 'mt019/phenom-judicial-translations',
   webCommit,

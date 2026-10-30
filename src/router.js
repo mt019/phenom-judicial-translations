@@ -1,0 +1,2 @@
+import {createRouter,createMemoryHistory,createWebHistory} from 'vue-router';
+export function makeRouter(server=false){return createRouter({history:server?createMemoryHistory():createWebHistory(),routes:[{path:'/',component:()=>import('./pages/JirsForeignLaw.jsx')},{path:'/index.html',redirect:'/'},{path:'/glossary',component:()=>import('./pages/LegalGlossary.jsx')},{path:'/:pathMatch(.*)*',component:()=>import('./NotFound.vue')}],scrollBehavior(to,from,saved){if(saved)return saved;if(to.hash)return {el:to.hash,top:16};if(to.path!==from.path)return {top:0};return false;}});}

@@ -6,3 +6,4 @@ dist/
 .wrangler/
 src/data/generated/
 .DS_Store
+.test-evidence/

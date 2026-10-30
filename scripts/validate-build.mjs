@@ -22,7 +22,7 @@ const checks = [
   [glossary.includes('https://judicial-translations.phenomcanvas.com/glossary/'), 'glossary canonical'],
   [glossary.includes('工作表'), 'glossary 狀態'],
   [glossary.includes('data-glossary-root'), 'glossary 搜尋'],
-  [/aria-label="回外國法翻譯索引"[^>]*href="\/"/.test(glossary), 'glossary 眉標返回首頁'],
+  [[...glossary.matchAll(/<a\b[^>]*>/g)].some(([tag])=>tag.includes('aria-label="回外國法翻譯索引"')&&/href="\/"/.test(tag)), 'glossary 眉標返回首頁'],
   [executable.includes('Abwägung'), '多譯裁決德文標題'],
   [executable.includes('衡量') && executable.includes('定稿標準譯'), '多譯裁決結果'],
   [notFound.includes('找不到這一頁'), '404'],

@@ -1,12 +1,2 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router';
-import App from './App.jsx';
-
-export function render(url) {
-  return renderToString(
-    <StaticRouter location={url}>
-      <App />
-    </StaticRouter>,
-  );
-}
+import {createSSRApp} from 'vue';import {renderToString} from '@vue/server-renderer';import {STATIC_QUERY_HYDRATION} from '@phenomcanvas/ui-vue';import App from './App.jsx';import {makeRouter} from './router.js';
+export async function render(url){const router=makeRouter(true);const app=createSSRApp(App);app.provide(STATIC_QUERY_HYDRATION,true);app.use(router);await router.push(url);await router.isReady();return renderToString(app);}

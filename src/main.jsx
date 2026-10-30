@@ -1,18 +1,3 @@
-import React from 'react';
-import { hydrateRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { bootSitePalette } from '@phenomcanvas/ui';
-import './tailwind.css';
-import '@phenomcanvas/ui/styles.css';
-import App from './App.jsx';
-
-bootSitePalette();
-
-hydrateRoot(
-  document.getElementById('root'),
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-);
+import {createApp,createSSRApp} from 'vue';import {bootSitePalette,STATIC_QUERY_HYDRATION} from '@phenomcanvas/ui-vue';
+import './tailwind.css';import '@phenomcanvas/ui-vue/legacy/0.1.31/styles.css';import App from './App.jsx';import {makeRouter} from './router.js';
+bootSitePalette();const router=makeRouter();const root=document.getElementById('root');const app=(root.hasChildNodes()?createSSRApp:createApp)(App);app.provide(STATIC_QUERY_HYDRATION,true);app.use(router);await router.isReady();app.mount(root);

@@ -5,6 +5,8 @@ import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const dist = path.join(root, 'dist');
 const template = await readFile(path.join(dist, 'index.html'), 'utf8');
+const day = new Date();
+globalThis.__PHENOM_DAILY_SEED__ = day.getFullYear() * 372 + day.getMonth() * 31 + day.getDate();
 const { render } = await import(pathToFileURL(path.join(root, '.ssr/entry-server.js')));
 const origin = 'https://judicial-translations.phenomcanvas.com';
 
@@ -68,7 +70,8 @@ for (const page of pages) {
   ].join('\n    ');
   const html = template
     .replace(/<title>[\s\S]*?<\/title>/, head)
-    .replace('<div id="root"></div>', `<div id="root">${render(page.route)}</div>`);
+    .replace('</head>', `<script>globalThis.__PHENOM_DAILY_SEED__=${globalThis.__PHENOM_DAILY_SEED__}</script></head>`)
+    .replace('<div id="root"></div>', `<div id="root">${await render(page.route)}</div>`);
   const output = path.join(dist, page.file);
   await mkdir(path.dirname(output), { recursive: true });
   await writeFile(output, html);
